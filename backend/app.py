@@ -3,10 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 import json
 import asyncio
 import uvicorn
-from backend.model import *
-from backend.config import *
-from backend.sockets import *
-from backend.database import *
+from model import *
+from config import *
+from sockets import *
+from database import *
 
 app = FastAPI()
 
@@ -119,6 +119,6 @@ if __name__ == "__main__":
         port=6543,
         reload=True,
         headers=[("server", "Qualsu Europe")],
-        ssl_keyfile=None if os.name == 'nt' else backend.config.ssl_key,
-        ssl_certfile=None if os.name == 'nt' else backend.config.ssl_cert
+        ssl_keyfile=None if os.name == 'nt' else ssl_key,
+        ssl_certfile=None if os.name == 'nt' else ssl_cert
     )
