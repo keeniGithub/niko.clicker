@@ -52,7 +52,7 @@ function App() {
   useEffect(() => {
     if (!isAuthenticated) return;
 
-    userWsRef.current = new WebSocket(`ws://${import.meta.env.VITE_API_DOMAIN}/ws/user/${username}`);
+    userWsRef.current = new WebSocket(`wss://${import.meta.env.VITE_API_DOMAIN}/ws/user/${username}`);
     
     userWsRef.current.onopen = () => {
       console.log('User WebSocket connected');
@@ -70,7 +70,7 @@ function App() {
       console.log('User WebSocket disconnected');
     };
 
-    leaderboardWsRef.current = new WebSocket(`ws://${import.meta.env.VITE_API_DOMAIN}/ws/leaderboard`);
+    leaderboardWsRef.current = new WebSocket(`wss://${import.meta.env.VITE_API_DOMAIN}/ws/leaderboard`);
     
     leaderboardWsRef.current.onopen = () => {
       console.log('Leaderboard WebSocket connected');
@@ -135,7 +135,7 @@ function App() {
     if (!validateUsername()) return;
     
     try {
-      const response = await fetch(`http://${import.meta.env.VITE_API_DOMAIN}/register`, {
+      const response = await fetch(`https://${import.meta.env.VITE_API_DOMAIN}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ function App() {
 
   const fetchUserData = async (usernameToFetch = username) => {
     try {
-      const userResponse = await fetch(`http://${import.meta.env.VITE_API_DOMAIN}/user/${usernameToFetch}`);
+      const userResponse = await fetch(`https://${import.meta.env.VITE_API_DOMAIN}/user/${usernameToFetch}`);
       if (userResponse.status === 404) {
         localStorage.removeItem('clickerGameUsername');
         setIsAuthenticated(false);
@@ -168,7 +168,7 @@ function App() {
       setScore(userData.score);
       setPosition(userData.position);
 
-      const lbResponse = await fetch(`http://${import.meta.env.VITE_API_DOMAIN}/leaderboard`);
+      const lbResponse = await fetch(`https://${import.meta.env.VITE_API_DOMAIN}/leaderboard`);
       const lbData = await lbResponse.json();
       setLeaderboard(lbData);
     } catch (err) {
@@ -200,7 +200,7 @@ function App() {
     }
     
     try {
-      const response = await fetch(`http://${import.meta.env.VITE_API_DOMAIN}/click`, {
+      const response = await fetch(`https://${import.meta.env.VITE_API_DOMAIN}/click`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
