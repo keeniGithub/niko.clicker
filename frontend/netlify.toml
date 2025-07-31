@@ -1,5 +1,0 @@
-[[redirects]]
-  from = "/ws/*"
-  to = "https://eu-api.qual.su:6543/ws/:splat"
-  status = 200
-  force = true
