@@ -4,6 +4,7 @@ ORIGINS = [
     "http://localhost:5173",
     "https://niko-clicker.netlify.app",
     "https://niko-clicker.thekeny.ru",
+    "http://srv.thekeny.ru:5173",
     "https://niko.click"
 ]
 
