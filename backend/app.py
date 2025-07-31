@@ -2,6 +2,7 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import json
 import asyncio
+import uvicorn
 from model import *
 from config import *
 from sockets import *
@@ -110,3 +111,14 @@ async def get_user(username: str):
         "score": db["users"][username].get("score", 0),
         "position": position
     }
+
+if __name__ == "__main__":
+    uvicorn.run(
+        "app:app",
+        host="0.0.0.0",
+        port=6543,
+        reload=True,
+        headers=[("server", "Qualsu Europe")],
+        ssl_keyfile=None if os.name == 'nt' else config.ssl_key,
+        ssl_certfile=None if os.name == 'nt' else config.ssl_cert
+    )
